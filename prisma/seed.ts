@@ -29,7 +29,11 @@ async function company(name: string, kind: "T1" | "T2") {
 async function main() {
   const adminEmail = (process.env.SEED_ADMIN_EMAIL || "").toLowerCase();
   const adminPassword = process.env.SEED_ADMIN_PASSWORD || "";
-  if (!adminEmail || adminPassword.length < 8) throw new Error("Set SEED_ADMIN_EMAIL and SEED_ADMIN_PASSWORD (8+ characters) before seeding.");
+  if (!adminEmail || adminPassword.length < 8) {
+    // During a Vercel build the seed is optional: without these variables the deploy continues with no data loaded.
+    if (process.env.VERCEL) return console.log("Seed skipped: set SEED_ADMIN_EMAIL and SEED_ADMIN_PASSWORD (8+ characters) to load the initial data.");
+    throw new Error("Set SEED_ADMIN_EMAIL and SEED_ADMIN_PASSWORD (8+ characters) before seeding.");
+  }
 
   const factories = { Vaqueras: await company("Vaqueras", "T1"), Dante: await company("Dante", "T1") };
   await company("Lefarc", "T2");

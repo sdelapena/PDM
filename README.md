@@ -8,17 +8,12 @@ Stack: Next.js (App Router) · Prisma · PostgreSQL (Supabase) · Supabase Stora
 
 1. **Supabase**: create a project. In Storage, create a **public** bucket named `pdm-photos`.
 2. **SendGrid**: create an API key and verify the sender address or domain.
-3. **Vercel**: import this repository and set every variable from `.env.example`
-   (`SEED_ADMIN_*` are only needed where you run the seed). Set the build command to `npm run vercel-build`
-   so migrations are applied on each deploy.
-4. **First data load** (once, from your computer with `.env` pointing at Supabase):
-   ```bash
-   npm install
-   npm run db:migrate
-   npm run db:seed
-   ```
-   The seed creates the Admin (`SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD`), the Justin users, the companies and the
-   23 Vaqueras/Dante styles from the monday.com board. It is safe to run again: existing rows are skipped.
+3. **Vercel**: import this repository and set every variable from `.env.example`. Set the build command to
+   `npm run vercel-build` so each deploy applies the migrations and loads the initial data.
+4. **First data load**: happens during the deploy when `SEED_ADMIN_EMAIL` and `SEED_ADMIN_PASSWORD` are set.
+   The seed creates the Admin with those credentials, the Justin users, the companies and the 23 Vaqueras/Dante
+   styles from the monday.com board. It is safe to run again: existing rows are skipped, and the Admin password
+   is only used the first time. Once the Admin can sign in, both variables can be removed from Vercel.
 5. Sign in as the Admin, open **Menu → User Management** and replace each placeholder email with the real one.
    Each user then receives a link to choose their password.
 

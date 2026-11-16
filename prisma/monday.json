@@ -1,0 +1,628 @@
+[
+ {
+  "factory": "Vaqueras",
+  "pdNumber": "TL5370",
+  "collection": "TL ACS",
+  "price": "210.35",
+  "po": "With PO",
+  "firstPoDate": "2026-11-20",
+  "lineBuilder": "Gerardo",
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "A",
+   "20": "A",
+   "21": "A",
+   "22": "P",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "P"
+  },
+  "notes": [
+   {
+    "stepNo": 25,
+    "text": "Approved with comments"
+   },
+   {
+    "stepNo": 31,
+    "text": "Exotic material pending"
+   }
+  ]
+ },
+ {
+  "factory": "Vaqueras",
+  "pdNumber": "TL5358",
+  "collection": "TL ACS",
+  "price": "191.75",
+  "po": "With PO",
+  "firstPoDate": "2026-11-20",
+  "lineBuilder": "Gerardo",
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "A",
+   "20": "A",
+   "21": "A",
+   "22": "P",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "P"
+  },
+  "notes": [
+   {
+    "stepNo": 25,
+    "text": "Approved with comments"
+   },
+   {
+    "stepNo": 31,
+    "text": "Exotic material pending"
+   }
+  ]
+ },
+ {
+  "factory": "Vaqueras",
+  "pdNumber": "TL5371",
+  "collection": "TL ACS",
+  "price": "210.35",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": "Gerardo",
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "A",
+   "20": "A",
+   "21": "A",
+   "22": "P",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "P"
+  },
+  "notes": [
+   {
+    "stepNo": 25,
+    "text": "Approved with comments"
+   },
+   {
+    "stepNo": 31,
+    "text": "Exotic material pending"
+   }
+  ]
+ },
+ {
+  "factory": "Vaqueras",
+  "pdNumber": "TL5359",
+  "collection": "TL ACS",
+  "price": "191.75",
+  "po": "With PO",
+  "firstPoDate": "2026-12-04",
+  "lineBuilder": "Paul",
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "A",
+   "20": "A",
+   "21": "A",
+   "22": "P",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "P"
+  },
+  "notes": [
+   {
+    "stepNo": 25,
+    "text": "Approved with comments"
+   },
+   {
+    "stepNo": 31,
+    "text": "Exotic material pending"
+   }
+  ]
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "BL4096L",
+  "collection": "Handtooled",
+  "price": "583.29",
+  "po": "With PO",
+  "firstPoDate": "2026-11-13",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "N",
+   "14": "A",
+   "15": "A",
+   "18": "N",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "N",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": [
+   {
+    "stepNo": 15,
+    "text": "Black box"
+   }
+  ]
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C47",
+  "collection": "Chippewa",
+  "price": "90.09",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "P",
+   "30": "P",
+   "31": "P"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "BL4097L",
+  "collection": "Handtooled",
+  "price": "583.29",
+  "po": "With PO",
+  "firstPoDate": "2026-11-13",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "N",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "N",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": [
+   {
+    "stepNo": 15,
+    "text": "Black box"
+   }
+  ]
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C46",
+  "collection": "Chippewa",
+  "price": "89.33",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C48",
+  "collection": "Chippewa",
+  "price": "93.24",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "BL4098L",
+  "collection": "Handtooled",
+  "price": "583.29",
+  "po": "With PO",
+  "firstPoDate": "2026-11-13",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "N",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "N",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": [
+   {
+    "stepNo": 15,
+    "text": "Black box"
+   }
+  ]
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C51",
+  "collection": "Chippewa",
+  "price": "99.08",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C53",
+  "collection": "Chippewa",
+  "price": "101.19",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C49",
+  "collection": "Chippewa",
+  "price": "93.68",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C52",
+  "collection": "Chippewa",
+  "price": "95.99",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C50",
+  "collection": "Chippewa",
+  "price": "99.08",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "A",
+   "30": "P",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C57",
+  "collection": "Chippewa",
+  "price": "92.8",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C54",
+  "collection": "Chippewa",
+  "price": "101.19",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "COJO120",
+  "collection": "Cody Johnson",
+  "price": "109.77",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "W",
+   "18": "A",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "P",
+   "30": "P",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C56",
+  "collection": "Chippewa",
+  "price": "92.8",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "P",
+   "30": "P",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "1901C55",
+  "collection": "Chippewa",
+  "price": "87.47",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "A",
+   "18": "P",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "A",
+   "30": "A",
+   "31": "A"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "COJO151",
+  "collection": "Cody Johnson",
+  "price": "111.07",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "W",
+   "18": "A",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "P",
+   "30": "P",
+   "31": "P"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "COJO150",
+  "collection": "Cody Johnson",
+  "price": "111.07",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "W",
+   "18": "A",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "P",
+   "30": "P",
+   "31": "P"
+  },
+  "notes": []
+ },
+ {
+  "factory": "Dante",
+  "pdNumber": "COJO121",
+  "collection": "Cody Johnson",
+  "price": "109.77",
+  "po": "With PO",
+  "firstPoDate": "2026-11-27",
+  "lineBuilder": null,
+  "steps": {
+   "1": "A",
+   "6": "A",
+   "13": "A",
+   "14": "A",
+   "15": "W",
+   "18": "A",
+   "20": "A",
+   "21": "A",
+   "22": "A",
+   "25": "A",
+   "29": "P",
+   "30": "P",
+   "31": "P"
+  },
+  "notes": []
+ }
+]

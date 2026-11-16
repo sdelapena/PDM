@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PDM · Product Development Manager (Justin)
 
-## Getting Started
+Tracks every footwear style from Project Brief to production, per factory (T1). Built from `PDM_Especificacion_v1`.
 
-First, run the development server:
+Stack: Next.js (App Router) · Prisma · PostgreSQL (Supabase) · Supabase Storage (photos) · SendGrid (email) · Vercel.
+
+## Deploy (Vercel + Supabase)
+
+1. **Supabase**: create a project. In Storage, create a **public** bucket named `pdm-photos`.
+2. **SendGrid**: create an API key and verify the sender address or domain.
+3. **Vercel**: import this repository and set every variable from `.env.example`
+   (`SEED_ADMIN_*` are only needed where you run the seed). Set the build command to `npm run vercel-build`
+   so migrations are applied on each deploy.
+4. **First data load** (once, from your computer with `.env` pointing at Supabase):
+   ```bash
+   npm install
+   npm run db:migrate
+   npm run db:seed
+   ```
+   The seed creates the Admin (`SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD`), the Justin users, the companies and the
+   23 Vaqueras/Dante styles from the monday.com board. It is safe to run again: existing rows are skipped.
+5. Sign in as the Admin, open **Menu → User Management** and replace each placeholder email with the real one.
+   Each user then receives a link to choose their password.
+
+## Local development
 
 ```bash
+cp .env.example .env   # fill DATABASE_URL, DIRECT_URL, AUTH_SECRET, SEED_ADMIN_*
+npm install
+npx prisma migrate dev
+npm run db:seed
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Without SendGrid variables, emails are printed to the server log. Without Supabase variables, photos are saved to
+`public/uploads` (development only).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where things are
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Path | Contents |
+|---|---|
+| `lib/catalog.ts` | The 31 subitems: sections, valid statuses, fields, default owners |
+| `lib/logic.ts` | Calculated rules: alerts, style status, progress bar, formats |
+| `lib/perm.ts` | Permission matrix, enforced by every route in `app/api` |
+| `app/api/subitems/[id]/route.ts` | Subitem edits: automatic dates, rounds, history, notifications |
+| `prisma/schema.prisma` | Data model |
+| `prisma/monday.json` | Styles imported from monday.com |
+| `components/` | Screens (board, panels, management, T2 list, sign-in) |

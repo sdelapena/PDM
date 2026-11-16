@@ -1,0 +1,165 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum UserType {
+  ADMIN
+  JUSTIN
+  T1
+  T2
+}
+
+enum CompanyKind {
+  T1
+  T2
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  passwordHash  String?
+  passwordChangedAt DateTime?
+  type          UserType
+  companyId     String?
+  company       Company?  @relation(fields: [companyId], references: [id])
+  isLineBuilder Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+
+  lineBuilderOf Style[]                    @relation("LineBuilder")
+  createdStyles Style[]                    @relation("Creator")
+  ownedSubitems Subitem[]
+  messages      DiscussionMessage[]
+  subscriptions NotificationSubscription[]
+  history       HistoryEntry[]
+  tokens        PasswordToken[]
+}
+
+model PasswordToken {
+  id        String    @id @default(cuid())
+  tokenHash String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model Company {
+  id        String      @id @default(cuid())
+  name      String
+  kind      CompanyKind
+  active    Boolean     @default(true)
+  createdAt DateTime    @default(now())
+
+  users    User[]
+  styles   Style[]
+  styleT2s StyleT2[]
+
+  @@unique([kind, name])
+}
+
+model Style {
+  id            String    @id @default(cuid())
+  pdNumber      String    @unique
+  collection    String    @default("")
+  // Required by the API on create/edit; nullable only for styles imported from monday.com without one.
+  lineBuilderId String?
+  lineBuilder   User?     @relation("LineBuilder", fields: [lineBuilderId], references: [id])
+  t1CompanyId   String
+  t1Company     Company   @relation(fields: [t1CompanyId], references: [id])
+  firstPoDate   DateTime  @db.Date
+  photo         String?
+  cancelledAt   DateTime?
+  createdById   String?
+  createdBy     User?     @relation("Creator", fields: [createdById], references: [id])
+  createdAt     DateTime  @default(now())
+  deletedAt     DateTime?
+  finalizedNotified Boolean @default(false)
+
+  t2s           StyleT2[]
+  subitems      Subitem[]
+  messages      DiscussionMessage[]
+  subscriptions NotificationSubscription[]
+  history       HistoryEntry[]
+
+  @@index([t1CompanyId])
+}
+
+model StyleT2 {
+  styleId   String
+  style     Style   @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  slot      Int // 1 or 2
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id])
+
+  @@id([styleId, slot])
+}
+
+model Subitem {
+  id             String    @id @default(cuid())
+  styleId        String
+  style          Style     @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  stepNo         Int // 1..31, see lib/catalog.ts
+  round          Int       @default(1)
+  status         String
+  ownerId        String?
+  owner          User?     @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  reqDate        DateTime? @db.Date
+  confDate       DateTime? @db.Date
+  realDate       DateTime? @db.Date
+  date           DateTime? @db.Date
+  price          Decimal?  @db.Decimal(10, 2)
+  targetPrice    Decimal?  @db.Decimal(10, 2)
+  pairs          Int?
+  trackingNumber String?
+  description    String?   @db.VarChar(40)
+  photo          String?
+  overdueNotifiedFor DateTime? @db.Date
+
+  @@unique([styleId, stepNo, round])
+  @@index([ownerId])
+}
+
+model DiscussionMessage {
+  id        String   @id @default(cuid())
+  styleId   String
+  style     Style    @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  text      String
+  createdAt DateTime @default(now())
+
+  @@index([styleId])
+}
+
+model NotificationSubscription {
+  styleId String
+  style   Style  @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([styleId, userId])
+}
+
+model HistoryEntry {
+  id          String   @id @default(cuid())
+  styleId     String
+  style       Style    @relation(fields: [styleId], references: [id], onDelete: Cascade)
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  timestamp   DateTime @default(now())
+  description String
+  field       String?
+  oldValue    String?
+  newValue    String?
+  mergeKey    String?
+
+  @@index([styleId, timestamp])
+}

@@ -1,7 +1,9 @@
 import sg from "@sendgrid/mail";
 
 export function appUrl(): string {
-  const u = process.env.APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  // VERCEL_URL is the per-deployment address, which Vercel puts behind its own login; email links must use the production domain.
+  const prod = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  const u = process.env.APP_URL || (prod ? `https://${prod}` : "http://localhost:3000");
   return u.replace(/\/$/, "");
 }
 

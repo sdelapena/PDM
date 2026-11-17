@@ -60,7 +60,6 @@ model Company {
 
   users    User[]
   styles   Style[]
-  styleT2s StyleT2[]
 
   @@unique([kind, name])
 }
@@ -74,7 +73,6 @@ model Style {
   lineBuilder   User?     @relation("LineBuilder", fields: [lineBuilderId], references: [id])
   t1CompanyId   String
   t1Company     Company   @relation(fields: [t1CompanyId], references: [id])
-  firstPoDate   DateTime  @db.Date
   photo         String?
   cancelledAt   DateTime?
   createdById   String?
@@ -83,23 +81,12 @@ model Style {
   deletedAt     DateTime?
   finalizedNotified Boolean @default(false)
 
-  t2s           StyleT2[]
   subitems      Subitem[]
   messages      DiscussionMessage[]
   subscriptions NotificationSubscription[]
   history       HistoryEntry[]
 
   @@index([t1CompanyId])
-}
-
-model StyleT2 {
-  styleId   String
-  style     Style   @relation(fields: [styleId], references: [id], onDelete: Cascade)
-  slot      Int // 1 or 2
-  companyId String
-  company   Company @relation(fields: [companyId], references: [id])
-
-  @@id([styleId, slot])
 }
 
 model Subitem {

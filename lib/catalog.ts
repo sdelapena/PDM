@@ -53,8 +53,8 @@ export const OPEN: ReadonlySet<string> = new Set([
 
 export type DateMode = "RCR" | "DATE" | "NONE";
 export type Field = "price" | "targetPrice" | "pairs" | "tracking" | "leather" | "material" | "photo";
-// F = first T1 user of the factory, T2A = T2 #1, T2B = T2 #2 (falls back to T2 #1); otherwise a Justin/Admin user name.
-export type DefaultOwner = "F" | "T2A" | "T2B" | (string & {});
+// F = first T1 user of the factory; null = no owner (assigned by hand); otherwise a Justin/Admin user name.
+export type DefaultOwner = "F" | null | (string & {});
 
 export interface Step {
   no: number;
@@ -103,16 +103,16 @@ export const STEPS: Step[] = [
   s(1, 0, "Project Brief", BRIEF, "DATE", [], "Sebastián"),
   s(2, 0, "Target Price", ["NOT_STARTED", "DELIVERED"], "NONE", ["targetPrice"], "Paul", { auto: "targetPrice" }),
   s(3, 0, "Proto Specs", BRIEF, "DATE", [], "Sebastián"),
-  s(4, 0, "Leather Shaft", LEATHER, "RCR", ["leather"], "T2A", { autoDates: true }),
-  s(5, 0, "Leather Vamp", LEATHER, "RCR", ["leather"], "T2A", { autoDates: true }),
+  s(4, 0, "Leather Shaft", LEATHER, "RCR", ["leather"], null, { autoDates: true }),
+  s(5, 0, "Leather Vamp", LEATHER, "RCR", ["leather"], null, { autoDates: true }),
   s(6, 0, "Proto", ["NOT_STARTED", "IN_PROGRESS", "APPROVED", "NA"], "RCR", ["tracking"], "F"),
   s(7, 0, "Proto Price", PRICE, "NONE", ["price"], "F"),
   s(8, 0, "Photo", PHOTO, "NONE", ["photo"], "Edna", { auto: "photo" }),
 
   s(9, 1, "Specs", SPECS, "DATE", [], "Paul"),
-  s(10, 1, "Leather Vamp", LEATHER, "RCR", ["leather"], "T2A", { autoDates: true }),
-  s(11, 1, "Leather Shaft", LEATHER, "RCR", ["leather"], "T2A", { autoDates: true }),
-  s(12, 1, "Material 3", LEATHER, "RCR", ["material"], "T2A", { autoDates: true }),
+  s(10, 1, "Leather Vamp", LEATHER, "RCR", ["leather"], null, { autoDates: true }),
+  s(11, 1, "Leather Shaft", LEATHER, "RCR", ["leather"], null, { autoDates: true }),
+  s(12, 1, "Material 3", LEATHER, "RCR", ["material"], null, { autoDates: true }),
   s(13, 1, "Sales Samples", SAMPLE, "RCR", ["pairs", "tracking"], "F"),
   s(14, 1, "Go By Samples", SAMPLE, "RCR", ["pairs", "tracking"], "Bubba"),
   s(15, 1, "Packing Definition", ["NOT_STARTED", "DELIVERED", "NA"], "DATE", [], "Gerardo"),
@@ -131,7 +131,7 @@ export const STEPS: Step[] = [
   s(26, 3, "Lab Samples", SAMPLE, "RCR", ["tracking"], "Gerardo", { rounds: true }),
   s(27, 3, "ASTM", GENERIC, "RCR", [], "Gerardo"),
 
-  s(28, 4, "Outsole Molds", ["NOT_STARTED", "IN_PROGRESS", "APPROVED", "NA"], "RCR", [], "T2B"),
+  s(28, 4, "Outsole Molds", ["NOT_STARTED", "IN_PROGRESS", "APPROVED", "NA"], "RCR", [], null),
   s(29, 4, "Pilot Run", ["NOT_STARTED", "IN_PROCESS", "REJECTED_MX", "APPROVED"], "RCR", [], "F"),
   s(30, 4, "Lead", GENERIC, "RCR", [], "F"),
   s(31, 4, "Materials", GENERIC, "RCR", [], "F"),

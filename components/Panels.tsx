@@ -25,7 +25,6 @@ export function StyleForm({
   style,
   factories,
   users,
-  t2Companies,
   admin,
   onClose,
   onSaved,
@@ -35,7 +34,6 @@ export function StyleForm({
   style?: StyleDTO;
   factories: Named[];
   users: UserLite[];
-  t2Companies: Named[];
   admin: boolean;
   onClose: () => void;
   onSaved: (s: StyleDTO) => void;
@@ -45,9 +43,6 @@ export function StyleForm({
   const [pdNumber, setPdNumber] = useState("");
   const [collection, setCollection] = useState(style?.collection ?? "");
   const [lineBuilderId, setLineBuilderId] = useState(style?.lineBuilderId ?? "");
-  const [t2a, setT2a] = useState(style?.t2[0] ?? "");
-  const [t2b, setT2b] = useState(style?.t2[1] ?? "");
-  const [date, setDate] = useState(style?.firstPoDate ?? "");
   const [photo, setPhoto] = useState(style?.photo ?? "");
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
@@ -58,10 +53,9 @@ export function StyleForm({
   async function save() {
     if (!edit && !pdNumber.trim()) return setErr("PD # / SKU is required.");
     if (!lineBuilderId) return setErr("Line Builder is required.");
-    if (!date) return setErr("First PO Date is required.");
     setBusy(true);
     setErr("");
-    const payload = { collection, lineBuilderId, t2: [t2a || null, t2b || null], firstPoDate: date, photo: photo || null };
+    const payload = { collection, lineBuilderId, photo: photo || null };
     try {
       const saved = edit
         ? await api<StyleDTO>(`/api/styles/${style!.id}`, { method: "PATCH", json: payload })
@@ -72,16 +66,6 @@ export function StyleForm({
       setBusy(false);
     }
   }
-
-  const t2Select = (label: string, value: string, set: (v: string) => void) => (
-    <label className="formlabel">
-      {label}
-      <select className="inp" value={value} onChange={(e) => set(e.target.value)}>
-        <option value="">—</option>
-        {t2Companies.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-      </select>
-    </label>
-  );
 
   return (
     <SidePanel
@@ -124,14 +108,6 @@ export function StyleForm({
             {lineBuilders.map((u) => <option key={u.id} value={u.id}>{u.name}</option>)}
           </select>
         </label>
-        {t2Select("T2 #1 (optional)", t2a, setT2a)}
-        {t2Select("T2 #2 (optional)", t2b, setT2b)}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 12 }}>
-          <label className="formlabel">
-            First PO Date *
-            <input className="inp" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-          </label>
-        </div>
         <div className="formlabel">
           Style photo
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>

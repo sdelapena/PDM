@@ -61,8 +61,6 @@ async function main() {
         collection: m.collection,
         lineBuilderId: m.lineBuilder ? lineBuilders[m.lineBuilder] : null,
         t1CompanyId: factories[m.factory as "Vaqueras" | "Dante"].id,
-        t2: [null, null],
-        firstPoDate: new Date(m.firstPoDate + "T00:00:00Z"),
         photo: null,
         createdById: admin.id,
       });

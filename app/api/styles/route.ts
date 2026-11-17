@@ -25,8 +25,6 @@ export const POST = handler(async (req) => {
       collection: h.collection,
       lineBuilderId: h.lineBuilderId,
       t1CompanyId: factory.id,
-      t2: h.t2,
-      firstPoDate: h.firstPoDate,
       photo: h.photo,
       createdById: me.id,
     });

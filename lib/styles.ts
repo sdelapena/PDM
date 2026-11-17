@@ -10,7 +10,6 @@ export type Tx = Prisma.TransactionClient;
 export const STYLE_INCLUDE = {
   t1Company: { select: { id: true, name: true } },
   lineBuilder: { select: { id: true, name: true } },
-  t2s: { select: { slot: true, companyId: true } },
   subitems: { include: { owner: { select: { name: true } } }, orderBy: [{ stepNo: "asc" }, { round: "asc" }] },
   _count: { select: { messages: true, subscriptions: true } },
 } satisfies Prisma.StyleInclude;
@@ -30,8 +29,6 @@ export function serializeStyle(s: FullStyle) {
     lineBuilderName: s.lineBuilder?.name ?? null,
     factoryId: s.t1CompanyId,
     factory: s.t1Company.name,
-    t2: [1, 2].map((slot) => s.t2s.find((x) => x.slot === slot)?.companyId ?? null),
-    firstPoDate: dateToIso(s.firstPoDate)!,
     photo: s.photo,
     cancelled: !!s.cancelledAt,
     messages: s._count.messages,
@@ -110,21 +107,14 @@ export async function addHistory(
   });
 }
 
-async function defaultOwnerId(tx: Tx, step: Step, factoryId: string, t2: (string | null)[]): Promise<string | null> {
-  const firstOf = async (companyId: string | null) =>
-    companyId ? ((await tx.user.findFirst({ where: { companyId }, orderBy: { createdAt: "asc" } }))?.id ?? null) : null;
-  switch (step.defaultOwner) {
-    case "F":
-      return firstOf(factoryId);
-    case "T2A":
-      return firstOf(t2[0]);
-    case "T2B":
-      return firstOf(t2[1] ?? t2[0]);
-    default:
-      return (
-        (await tx.user.findFirst({ where: { name: step.defaultOwner, type: { in: ["ADMIN", "JUSTIN"] } }, orderBy: { createdAt: "asc" } }))?.id ?? null
-      );
+async function defaultOwnerId(tx: Tx, step: Step, factoryId: string): Promise<string | null> {
+  if (step.defaultOwner === null) return null;
+  if (step.defaultOwner === "F") {
+    return (await tx.user.findFirst({ where: { companyId: factoryId }, orderBy: { createdAt: "asc" } }))?.id ?? null;
   }
+  return (
+    (await tx.user.findFirst({ where: { name: step.defaultOwner, type: { in: ["ADMIN", "JUSTIN"] } }, orderBy: { createdAt: "asc" } }))?.id ?? null
+  );
 }
 
 export interface NewStyle {
@@ -132,8 +122,6 @@ export interface NewStyle {
   collection: string;
   lineBuilderId: string | null;
   t1CompanyId: string;
-  t2: (string | null)[];
-  firstPoDate: Date;
   photo: string | null;
   createdById: string | null;
 }
@@ -146,18 +134,15 @@ export async function createStyle(tx: Tx, data: NewStyle): Promise<string> {
       collection: data.collection,
       lineBuilderId: data.lineBuilderId,
       t1CompanyId: data.t1CompanyId,
-      firstPoDate: data.firstPoDate,
       photo: data.photo,
       createdById: data.createdById,
     },
   });
-  const slots = data.t2.map((companyId, i) => ({ slot: i + 1, companyId })).filter((x): x is { slot: number; companyId: string } => !!x.companyId);
-  if (slots.length) await tx.styleT2.createMany({ data: slots.map((x) => ({ styleId: style.id, ...x })) });
 
-  const owners = new Map<string, string | null>();
+  const owners = new Map<string | null, string | null>();
   const rows = [];
   for (const step of STEPS) {
-    if (!owners.has(step.defaultOwner)) owners.set(step.defaultOwner, await defaultOwnerId(tx, step, data.t1CompanyId, data.t2));
+    if (!owners.has(step.defaultOwner)) owners.set(step.defaultOwner, await defaultOwnerId(tx, step, data.t1CompanyId));
     rows.push({ styleId: style.id, stepNo: step.no, round: 1, status: initialStatus(step), ownerId: owners.get(step.defaultOwner) ?? null });
   }
   await tx.subitem.createMany({ data: rows });

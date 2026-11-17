@@ -65,6 +65,11 @@ export function Shell({
           <span style={{ fontSize: 13, color: "#4a5068" }}>
             Signed in as <strong style={{ color: "#1c2033" }}>{userName}</strong>
           </span>
+          {onAdd ? (
+            <button className="tbtn btn-primary" onClick={onAdd}>
+              + Add style
+            </button>
+          ) : null}
           <div ref={ref} style={{ position: "relative" }}>
             <button className="tbtn btn-secondary" style={{ display: "inline-flex", alignItems: "center", gap: 8 }} onClick={() => setOpen(!open)} aria-expanded={open} aria-haspopup="true">
               <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
@@ -74,11 +79,6 @@ export function Shell({
             </button>
             {open ? (
               <div role="menu" className="menu" style={{ position: "absolute", right: 0, top: 52 }}>
-                {onAdd ? (
-                  <button role="menuitem" className="menuitem" style={{ color: "#1d3f94", fontWeight: 600 }} onClick={item(onAdd)}>
-                    + Add style
-                  </button>
-                ) : null}
                 {showHome ? (
                   <Link role="menuitem" className="menuitem" style={{ textDecoration: "none" }} href="/" onClick={() => setOpen(false)}>
                     Home

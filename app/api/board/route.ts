@@ -14,16 +14,15 @@ export const GET = handler(async () => {
   const styles = await db.style.findMany({
     where: { deletedAt: null, t1CompanyId: { in: factories.map((f) => f.id) } },
     include: STYLE_INCLUDE,
-    orderBy: [{ collection: "asc" }, { firstPoDate: "asc" }, { pdNumber: "asc" }],
+    orderBy: [{ collection: "asc" }, { pdNumber: "asc" }],
   });
   const editor = canEdit(me);
   return {
     me: { id: me.id, name: me.name, type: me.type },
     perms: permsFor(me),
     factories,
-    // Only internal users get the user and supplier directories.
+    // Only internal users get the user directory.
     users: editor ? await db.user.findMany({ select: { id: true, name: true, type: true, isLineBuilder: true, companyId: true }, orderBy: { name: "asc" } }) : [],
-    t2Companies: editor ? await db.company.findMany({ where: { kind: "T2" }, select: { id: true, name: true }, orderBy: { name: "asc" } }) : [],
     styles: styles.map(serializeStyle),
   };
 });

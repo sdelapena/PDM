@@ -14,7 +14,6 @@ interface BoardData {
   perms: { admin: boolean; edit: boolean; manageStyles: boolean };
   factories: { id: string; name: string }[];
   users: UserLite[];
-  t2Companies: { id: string; name: string }[];
   styles: StyleDTO[];
 }
 
@@ -23,7 +22,7 @@ type Panel = { kind: "add" } | { kind: "duplicate" | "edit" | "discussion" | "no
 const GROUP_COLORS = ["#2f5fd0", "#7a3fc9", "#0f8a8a", "#c2620a", "#3d4a63"];
 
 function sortStyles(list: StyleDTO[]): StyleDTO[] {
-  return [...list].sort((a, b) => a.collection.localeCompare(b.collection) || a.firstPoDate.localeCompare(b.firstPoDate) || a.pdNumber.localeCompare(b.pdNumber));
+  return [...list].sort((a, b) => a.collection.localeCompare(b.collection) || a.pdNumber.localeCompare(b.pdNumber));
 }
 
 export function Board() {
@@ -315,9 +314,9 @@ export function Board() {
         </div>
       ) : null}
 
-      {panel?.kind === "add" ? <StyleForm mode="add" factories={factories} users={data.users} t2Companies={data.t2Companies} admin={perms.admin} onClose={() => setPanel(null)} onSaved={(s) => { replaceStyle(s); setPanel(null); }} /> : null}
+      {panel?.kind === "add" ? <StyleForm mode="add" factories={factories} users={data.users} admin={perms.admin} onClose={() => setPanel(null)} onSaved={(s) => { replaceStyle(s); setPanel(null); }} /> : null}
       {panel && panelStyle && (panel.kind === "duplicate" || panel.kind === "edit") ? (
-        <StyleForm key={panel.kind + panelStyle.id} mode={panel.kind} style={panelStyle} factories={factories} users={data.users} t2Companies={data.t2Companies} admin={perms.admin} onClose={() => setPanel(null)} onSaved={(s) => { replaceStyle(s); setPanel(null); }} onAskDelete={() => setConfirm({ kind: "delete", styleId: panelStyle.id })} />
+        <StyleForm key={panel.kind + panelStyle.id} mode={panel.kind} style={panelStyle} factories={factories} users={data.users} admin={perms.admin} onClose={() => setPanel(null)} onSaved={(s) => { replaceStyle(s); setPanel(null); }} onAskDelete={() => setConfirm({ kind: "delete", styleId: panelStyle.id })} />
       ) : null}
       {panel?.kind === "discussion" && panelStyle ? <DiscussionPanel style={panelStyle} author={me.name} onClose={() => setPanel(null)} onCount={onMessages} /> : null}
       {panel?.kind === "notifications" && panelStyle ? <NotificationsPanel style={panelStyle} users={data.users} onClose={() => setPanel(null)} onCount={onSubscribers} /> : null}

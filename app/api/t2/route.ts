@@ -12,7 +12,7 @@ export const GET = handler(async () => {
     where: { ownerId: me.id, style: { deletedAt: null, cancelledAt: null, t1Company: { active: true } } },
     select: {
       id: true, styleId: true, stepNo: true, round: true, status: true, reqDate: true, confDate: true, realDate: true, description: true,
-      style: { select: { pdNumber: true, collection: true, firstPoDate: true, t1Company: { select: { name: true } } } },
+      style: { select: { pdNumber: true, collection: true, t1Company: { select: { name: true } } } },
     },
   });
   const counts = await db.subitem.groupBy({
@@ -22,7 +22,7 @@ export const GET = handler(async () => {
   });
   const total = new Map(counts.map((c) => [`${c.styleId}|${c.stepNo}`, c._max.round ?? 1]));
   const rows = mine
-    .sort((a, b) => a.style.collection.localeCompare(b.style.collection) || +a.style.firstPoDate - +b.style.firstPoDate || a.style.pdNumber.localeCompare(b.style.pdNumber) || a.stepNo - b.stepNo || a.round - b.round)
+    .sort((a, b) => a.style.collection.localeCompare(b.style.collection) || a.style.pdNumber.localeCompare(b.style.pdNumber) || a.stepNo - b.stepNo || a.round - b.round)
     .map((x) => {
       const rounds = total.get(`${x.styleId}|${x.stepNo}`) ?? 1;
       return {

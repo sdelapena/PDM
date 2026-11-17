@@ -31,7 +31,6 @@ export function Board() {
   const [loadError, setLoadError] = useState("");
   const [tab, setTab] = useState("ALL");
   const [open, setOpen] = useState<Set<string>>(new Set());
-  const [onlyRisk, setOnlyRisk] = useState(false);
   const [hideFinalized, setHideFinalized] = useState(false);
   const [showPics, setShowPics] = useState(false);
   const [rowMenu, setRowMenu] = useState<{ id: string; right: number; top?: number; bottom?: number } | null>(null);
@@ -104,9 +103,9 @@ export function Board() {
       const latest = latestRounds(s.subitems);
       return { s, status, sections: sectionStates(s.subitems, today), proto: fmtPrice(latest.get(PROTO_PRICE_STEP)?.price), final: fmtPrice(latest.get(FINAL_PRICE_STEP)?.price) };
     });
-    const visible = rows.filter((r) => (!onlyRisk || r.status === "AT_RISK") && (!hideFinalized || r.status !== "FINALIZED"));
+    const visible = rows.filter((r) => !hideFinalized || r.status !== "FINALIZED");
     return { rows, visible };
-  }, [data, today, onlyRisk, hideFinalized]);
+  }, [data, today, hideFinalized]);
 
   if (!data || !view) {
     return (
@@ -143,7 +142,6 @@ export function Board() {
     { label: "Expand all", role: "menuitem", onClick: () => setOpen(new Set(shown.map((r) => r.s.id))) },
     { label: "Hide Finalized", role: "menuitemcheckbox", checked: hideFinalized, onClick: () => setHideFinalized(!hideFinalized) },
     { label: "Collapse all", role: "menuitem", onClick: () => setOpen(new Set()) },
-    { label: "At Risk only", role: "menuitemcheckbox", checked: onlyRisk, onClick: () => setOnlyRisk(!onlyRisk) },
     { label: "With picture", role: "menuitemradio", checked: showPics, onClick: () => setShowPics(true) },
     { label: "Without picture", role: "menuitemradio", checked: !showPics, onClick: () => setShowPics(false) },
   ];
